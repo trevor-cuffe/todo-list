@@ -7,6 +7,66 @@
     <title>TODO</title>
 </head>
 <body>
+    <header class="header">
+    </header>
+
+    <main class="main">
+        <h1 class="main-heading">TODO<img id="light-dark-toggle" class="light-dark-icon" src="images/icon-sun.svg"></h1>
+        <section class="section-todos">
+            <div class="newTodo">
+                <ul class="todos-list">
+                    <li class="todo">
+                        <button class="todo-checkbox" role="checkbox"></button>
+                        <div class="todo-content">
+                            <input type="text" class="todo-input" placeholder="Create a new todo..." >
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="todos-container">
+                <ul class="todos-list">
+                    <li class="todo todo">
+                        <button class="todo-checkbox" role="checkbox"></button>
+                        <div class="todo-content">
+                            <span class="todo-title">Complete online JavaScript course</span>
+                        </div>
+                    </li>
+                        <li class="todo todo-complete">
+                            <button class="todo-checkbox" role="checkbox"></button>
+                            <div class="todo-content">
+                                <span class="todo-title">10 minutes meditation</span>
+                            </div>
+                        </li>
+                        <li class="todo todo-complete">
+                            <button class="todo-checkbox" role="checkbox"></button>
+                            <div class="todo-content">
+                                <span class="todo-title">Complete online JavaScript course</span>
+                            </div>
+                        </li>
+                </ul>
+                <div class="todos-footer">
+                    <div class="todos-remaining-count">
+                        <span id="remainingTodos">0</span>
+                        <span> items left</span>
+                    </div>
+                    <div class="todos-filter">
+                        <ul class="todos-filter-list">
+                            <span class="selected">All</span>
+                            <span>Active</span>
+                            <span>Completed</span>
+                        </ul>
+                    </div>
+                    <div class="todos-clear">Clear Completed</div>
+                </div>
+            </div>
+
+
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p class="footer-instructions">Drag and drop to reorder list</p>
+    </footer>
     
     <script type="text/javascript" src="scripts/todo.js"></script>
 </body>
