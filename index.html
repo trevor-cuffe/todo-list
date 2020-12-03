@@ -46,26 +46,30 @@
                 </ul>
                 <div class="todos-footer">
                     <div class="todos-remaining-count">
-                        <span id="remainingTodos">0</span>
-                        <span> items left</span>
+                        <div class="todo-footer-button">
+                            <span id="remainingTodos">0</span>
+                             items left
+                        </div>
                     </div>
                     <div class="todos-filter">
                         <ul class="todos-filter-list">
-                            <span class="selected">All</span>
-                            <span>Active</span>
-                            <span>Completed</span>
+                            <span class="todo-footer-button selected">All</span>
+                            <span class="todo-footer-button">Active</span>
+                            <span class="todo-footer-button">Completed</span>
                         </ul>
                     </div>
-                    <div class="todos-clear">Clear Completed</div>
+                    <div class="todos-clear">
+                        <span class="todo-footer-button">Clear Completed</span>
+                    </div>
                 </div>
             </div>
 
 
         </section>
+        <p class="todos-instructions">Drag and drop to reorder list</p>
     </main>
 
     <footer class="footer">
-        <p class="footer-instructions">Drag and drop to reorder list</p>
     </footer>
     
     <script type="text/javascript" src="scripts/todo.js"></script>

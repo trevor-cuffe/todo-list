@@ -1,3 +1,235 @@
+:root {
+	/*Standard Colors*/
+	--color-brightBlue: hsl(220, 98%, 61%);
+	--checkBackground: linear-gradient(to bottom right, hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+
+	/*Day Theme*/
+	--headerBackground: url("../images/header-day.jpg");
+	--headerGradient: linear-gradient(to right, #a631ca90, #348afa80);
+	--headerBackgroundPosition: top 25% left 50%;
+
+	--color-todo: black;
+	--color-todos-text-complete: hsl(233, 11%, 84%);
+	--color-placeholder: hsl(236, 9%, 61%);
+	--color-todosBackground: hsl(0, 0%, 98%);
+	--color-todosBorder: hsl(233, 11%, 84%);
+
+	--color-lightGrayBlue: hsl(233, 11%, 84%);
+	--color-footerBackground: hsl(236, 33%, 92%);
+	--color-darkestGrayBlue: hsl(235, 19%, 35%);
+}
+
+[data-theme="dark"] {
+	/*Dark Theme*/
+	--headerBackground: url("../images/header-night.jpg");
+	--headerGradient: linear-gradient(to right, #2a1bfd80, #a20ccf90);
+	--headerBackgroundPosition: bottom 35% left 50%;
+
+	--color-todo: hsl(236, 33%, 92%);
+	--color-todos-text-complete: hsl(233, 14%, 35%);
+	--color-placeholder: hsl(234, 11%, 52%);
+	--color-todosBackground: hsl(235, 24%, 19%);
+	--color-footerBackground: hsl(235, 21%, 11%);
+	--color-todosBorder: hsl(233, 14%, 35%);
+
+	--color-lightGrayBlue: hsl(234, 39%, 85%);
+	--color-lightGrayBlueHover: hsl(236, 33%, 92%);
+	--color-darkestGrayBlue: hsl(237, 14%, 26%);
+
+	/*
+- Very Dark Blue: hsl(235, 21%, 11%)
+- Very Dark Desaturated Blue: hsl(235, 24%, 19%)
+- Light Grayish Blue: hsl(234, 39%, 85%)
+- Light Grayish Blue (hover): hsl(236, 33%, 92%)
+- Dark Grayish Blue: hsl(234, 11%, 52%)
+- Very Dark Grayish Blue: hsl(233, 14%, 35%)
+- Very Dark Grayish Blue: hsl(237, 14%, 26%)
+*/
+}
+
+*,
+*::after,
+*::before {
+	margin: 0;
+	padding: 0;
+	box-sizing: inherit;
+}
+
+html {
+	font-size: 62.5%;
+}
+
 body {
-	background-color: purple;
+	box-sizing: border-box;
+	font-size: 1.6em;
+}
+
+.header {
+	background-image: var(--headerGradient), var(--headerBackground);
+	background-size: cover;
+	background-position: var(--headerBackgroundPosition);
+	height: 40vh;
+}
+
+.main {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 60vw;
+	min-width: 20rem;
+	max-width: 100rem;
+}
+
+.main-heading {
+	color: white;
+	letter-spacing: 0.5em;
+	margin-bottom: 3rem;
+}
+
+.light-dark-icon {
+	float: right;
+}
+
+/* TODO list structure */
+.todos-container {
+	background-color: var(--color-todosBackground);
+	border-radius: 0.5rem;
+}
+
+.todos-container:not(:last-child) {
+	margin-bottom: 2rem;
+}
+
+.todos-list {
+	list-style: none;
+}
+
+.todos-list,
+.todo-input {
+	font-size: 1.8rem;
+	color: var(--color-todo);
+}
+
+.todo {
+	padding: 1em;
+	position: relative;
+}
+
+.todos-container-entered .todo {
+	border-bottom: 1px solid var(--color-todosBorder);
+}
+
+/*Styles for both NEW and ENTERED todos*/
+.todo-checkbox {
+	position: absolute;
+	left: 1rem;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	overflow: hidden;
+	border: 1px solid var(--color-darkGrayBlue);
+	outline: none;
+	background-color: transparent;
+}
+
+.todo-complete .todo-checkbox::after {
+	content: "";
+	background: url("../images/icon-check.svg");
+	background-size: contain;
+	background-repeat: no-repeat;
+	display: block;
+	position: absolute;
+	height: 60%;
+	width: 60%;
+	top: 55%;
+	left: 55%;
+	transform: translate(-50%, -50%);
+}
+
+.todo-checkbox:hover,
+.light-dark-icon:hover {
+	cursor: pointer;
+}
+
+.todo.todo-complete > .todo-checkbox {
+	background-image: var(--checkBackground);
+}
+
+.todo-content {
+	margin-left: 3rem;
+	word-wrap: wrap;
+}
+
+.todo.todo-complete > .todo-content {
+	text-decoration: line-through;
+	color: var(--color-todos-text-complete);
+}
+
+/* New TODO */
+.todo-input {
+	background: transparent;
+	outline: none;
+	border: none;
+}
+
+.todo-input::placeholder {
+	color: var(--color-placeholder);
+}
+
+/* Entered TODOs */
+
+.todos-footer {
+	display: flex;
+	padding: 2rem;
+	justify-content: space-between;
+	color: var(--color-todos-text-complete);
+	font-size: 1.2rem;
+}
+
+.todos-remaining-count,
+.todos-clear {
+	flex: 1 2 33%;
+}
+
+.todos-filter {
+	flex: 0 1 20rem;
+}
+
+.todos-clear {
+	text-align: right;
+}
+
+.todos-filter-list {
+	display: flex;
+	justify-content: space-around;
+}
+
+.todo-footer-button {
+	display: inline-block;
+	padding: 1px;
+}
+
+.todo-footer-button:hover {
+	cursor: pointer;
+}
+
+.todo-footer-button.selected {
+	color: var(--color-brightBlue);
+}
+
+.todos-instructions {
+	text-align: center;
+	color: var(--color-todos-text-complete);
+	margin-top: 3rem;
+	font-size: 1.2rem;
+}
+
+/* Footer */
+
+.footer {
+	background-color: var(--color-footerBackground);
+	height: 60vh;
 }
