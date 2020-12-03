@@ -1,10 +1,25 @@
 // document.addEventListener("DOMContentLoaded", function() {
     //*** variable declarations ***//
     const themeToggle = document.querySelector("#light-dark-toggle");
+    const todosLists = document.querySelectorAll(".todos-list");
+    console.log(todosLists);
+    const checkboxes = document.querySelectorAll(".todo-checkbox");
 
     //*** event listeners ***//
     themeToggle.addEventListener('click', toggleTheme);
+    for (list of todosLists) {
+        list.addEventListener('click', function(event) {
+            let targetElement = event.target;
+            console.log(targetElement);
+            let selector = 'todo-checkbox';
+            if(targetElement.classList.contains(selector)) {
+                const todo = targetElement.parentElement;
+                todo.classList.toggle("todo-complete");
+            }
+        });
+    }
 
+    
     // RUN ON LOAD
     init();
 
