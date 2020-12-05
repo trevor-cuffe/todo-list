@@ -4,6 +4,7 @@
     const allTodos = document.querySelector("#all-todos");
     const todosLists = document.querySelectorAll(".todos-list");
     const newTodoInput = document.querySelector(".todo-new form");
+    const remainingTodosCount = document.querySelector("#remainingTodos");
     const filterButtons = document.querySelectorAll(".todos-filter > .todos-filter-list > .todo-footer-button");
     const clearCompletedButton = document.querySelector("#clearCompleted");
     
@@ -21,6 +22,9 @@
                 const todo = targetElement.parentElement;
                 todo.classList.toggle("todo-complete");
             }
+            
+            //update item count
+            setItemCount();
         });
     }
 
@@ -65,6 +69,7 @@
     //*** methods ***//
     function init() {
         initTheme();
+        setItemCount();
     }
 
     function initTheme() {
@@ -129,6 +134,9 @@
         //add content to todo
         newTodo.appendChild(todoContent);
 
+        //update item count
+        setItemCount();
+
         return newTodo;
     }
 
@@ -187,6 +195,13 @@
                 todo.classList.add("fadeOut");
             }
         }
+    }
+
+    //refresh item count whenever items are added or removed
+    function setItemCount() {
+        const todos = allTodos.querySelectorAll(".todo:not(.todo-complete)");
+        const numItemsLeft = todos.length;
+        remainingTodosCount.innerText = numItemsLeft;
     }
 
 
