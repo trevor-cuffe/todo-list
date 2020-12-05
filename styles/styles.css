@@ -17,6 +17,8 @@
 	--color-lightGrayBlue: hsl(233, 11%, 84%);
 	--color-footerBackground: hsl(236, 33%, 92%);
 	--color-darkestGrayBlue: hsl(235, 19%, 35%);
+
+	--box-shadow: 0 15px 40px -5px rgba(0, 0, 0, 0.2);
 }
 
 [data-theme="dark"] {
@@ -35,6 +37,8 @@
 	--color-lightGrayBlue: hsl(234, 39%, 85%);
 	--color-lightGrayBlueHover: hsl(236, 33%, 92%);
 	--color-darkestGrayBlue: hsl(237, 14%, 26%);
+
+	--box-shadow: 0 15px 40px -5px rgba(0, 0, 0, 0.7);
 
 	/*
 - Very Dark Blue: hsl(235, 21%, 11%)
@@ -95,6 +99,7 @@ body {
 .todos-container {
 	background-color: var(--color-todosBackground);
 	border-radius: 0.5rem;
+	box-shadow: var(--box-shadow);
 }
 
 .todos-container:not(:last-child) {
