@@ -253,3 +253,29 @@ body {
 	background-color: var(--color-footerBackground);
 	height: 60vh;
 }
+
+@media only screen and (max-width: 640px) {
+	.todos-filter {
+		display: block;
+		position: absolute;
+		bottom: -3.5rem;
+		left: 0;
+		background-color: var(--color-todosBackground);
+		width: 100%;
+		padding: 2rem;
+		border-radius: 0.5rem;
+	}
+
+	.todos-filter-list {
+		justify-content: center;
+	}
+
+	.todos-filter-list .todo-footer-button {
+		margin: 0 1em;
+	}
+
+	.todos-remaining-count,
+	.todos-clear {
+		flex: 1 2 33%;
+	}
+}
