@@ -5,6 +5,7 @@
     const todosLists = document.querySelectorAll(".todos-list");
     const newTodoInput = document.querySelector(".todo-new form");
     const filterButtons = document.querySelectorAll(".todos-filter > .todos-filter-list > .todo-footer-button");
+    const clearCompletedButton = document.querySelector("#clearCompleted");
     
 
     //*** event listeners ***//
@@ -50,6 +51,9 @@
             filterButtonPressed.call(this);
         });
     }
+    
+    // clear completed button
+    clearCompletedButton.addEventListener('click', clearCompleted);
 
 
     // RUN ON LOAD
@@ -108,7 +112,6 @@
 
         //create checkbox element
         let checkbox = document.createElement('button');
-        console.dir(checkbox);
         checkbox.classList.add("todo-checkbox");
         checkbox.role = "checkbox";
         //add checkbox to todo
@@ -149,7 +152,6 @@
     //filter todos
     function filterTodos(filter) {
         if (!['all', 'complete', 'incomplete'].includes(filter)) return false;
-        console.log(filter);
 
 
         const todos = allTodos.querySelectorAll(".todo");
@@ -172,6 +174,19 @@
         }
         return true;
 
+    }
+
+    //clear completed todos
+    function clearCompleted() {
+        const todos = allTodos.querySelectorAll(".todo");
+        for (todo of todos) {
+            if(todo.classList.contains("todo-complete")) {
+                todo.addEventListener('transitionend', function() {
+                    this.remove();
+                })
+                todo.classList.add("fadeOut");
+            }
+        }
     }
 
 

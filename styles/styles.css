@@ -119,8 +119,20 @@ body {
 .todo {
 	padding: 1em;
 	position: relative;
-	transition: all 0.2s;
+	transition: all 0.3s;
 	overflow: hidden;
+}
+
+/*Use 'filter-hide' class to filter todos*/
+#all-todos .todo.filter-hide {
+	height: 0;
+	padding: 0;
+	opacity: 0;
+}
+
+/*use 'fadeOut' class to fade out todos*/
+.todo.fadeOut {
+	opacity: 0;
 }
 
 .todos-container-entered .todo {
@@ -187,13 +199,6 @@ body {
 }
 
 /* Entered TODOs */
-
-/*Use 'filter-hide' class to filter todos*/
-#all-todos .todo.filter-hide {
-	height: 0;
-	padding: 0;
-	opacity: 0;
-}
 
 .todos-footer {
 	display: flex;
