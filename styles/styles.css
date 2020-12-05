@@ -119,6 +119,8 @@ body {
 .todo {
 	padding: 1em;
 	position: relative;
+	transition: all 0.2s;
+	overflow: hidden;
 }
 
 .todos-container-entered .todo {
@@ -186,6 +188,13 @@ body {
 
 /* Entered TODOs */
 
+/*Use 'filter-hide' class to filter todos*/
+#all-todos .todo.filter-hide {
+	height: 0;
+	padding: 0;
+	opacity: 0;
+}
+
 .todos-footer {
 	display: flex;
 	padding: 2rem;
@@ -219,6 +228,7 @@ body {
 
 .todo-footer-button:hover {
 	cursor: pointer;
+	color: var(--color-todo);
 }
 
 .todo-footer-button.selected {

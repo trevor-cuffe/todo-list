@@ -3,8 +3,9 @@
     const themeToggle = document.querySelector("#light-dark-toggle");
     const allTodos = document.querySelector("#all-todos");
     const todosLists = document.querySelectorAll(".todos-list");
-    const checkboxes = document.querySelectorAll(".todo-checkbox");
     const newTodoInput = document.querySelector(".todo-new form");
+    const filterButtons = document.querySelectorAll(".todos-filter > .todos-filter-list > .todo-footer-button");
+    
 
     //*** event listeners ***//
     //Toggle Theme
@@ -24,11 +25,9 @@
 
     //New Todo Submit
     newTodoInput.addEventListener('submit', function(e) {
-        console.log("submit");
         //prevent default event response
         e.preventDefault();
         const todoElement = this.parentNode.parentNode;
-        console.log(todoElement);
         const todoTitleElement = this.querySelector(".todo-input");
         const completed = todoElement.classList.contains("todo-complete");
         const title = todoTitleElement.value;
@@ -44,6 +43,13 @@
         todoElement.classList.remove("todo-complete");
 
     });
+
+    // filter buttons
+    for(button of filterButtons) {
+        button.addEventListener('click', function() {
+            filterButtonPressed.call(this);
+        });
+    }
 
 
     // RUN ON LOAD
@@ -91,6 +97,7 @@
 
     }
 
+    // add new todo elements
     function createTodo(title, completed) {
         
         //create todo element
@@ -120,6 +127,51 @@
         newTodo.appendChild(todoContent);
 
         return newTodo;
+    }
+
+    // functionality for footer-buttons
+    //should be called by a filter button
+    function filterButtonPressed() {
+        //set selected status/style to filter buttons
+        for (button of filterButtons) {
+            if (button === this) {
+                button.classList.add("selected");
+            } else if (button.classList.contains("selected")) {
+                button.classList.remove("selected");
+            }
+        }
+
+        //perform filter
+        const filter = this.dataset.filter;
+        filterTodos(filter);
+    }
+
+    //filter todos
+    function filterTodos(filter) {
+        if (!['all', 'complete', 'incomplete'].includes(filter)) return false;
+        console.log(filter);
+
+
+        const todos = allTodos.querySelectorAll(".todo");
+        for (todo of todos) {
+            if (filter === 'all') {
+                todo.classList.remove("filter-hide");
+            } else if (filter === 'complete') {
+                if (todo.classList.contains("todo-complete")) {
+                    todo.classList.remove("filter-hide");
+                } else {
+                    todo.classList.add("filter-hide");
+                }
+            } else {
+                if (todo.classList.contains("todo-complete")) {
+                    todo.classList.add("filter-hide");
+                } else {
+                    todo.classList.remove("filter-hide");
+                }
+            }
+        }
+        return true;
+
     }
 
 
