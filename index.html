@@ -18,13 +18,15 @@
                     <li class="todo todo-new">
                         <button class="todo-checkbox" role="checkbox"></button>
                         <div class="todo-content">
-                            <input type="text" class="todo-input" placeholder="Create a new todo..." >
+                            <form action="#">
+                                <input type="text" class="todo-input" placeholder="Create a new todo..." >
+                            </form>
                         </div>
                     </li>
                 </ul>
             </div>
             <div class="todos-container todos-container-entered">
-                <ul class="todos-list">
+                <ul class="todos-list" id="all-todos">
                     <li class="todo">
                         <button class="todo-checkbox" role="checkbox"></button>
                         <div class="todo-content">
