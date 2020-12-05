@@ -189,10 +189,18 @@
         const todos = allTodos.querySelectorAll(".todo");
         for (todo of todos) {
             if(todo.classList.contains("todo-complete")) {
-                todo.addEventListener('transitionend', function() {
-                    this.remove();
-                })
-                todo.classList.add("fadeOut");
+                //if active button is selected, simply delete the item
+                if(filterButtons[1].classList.contains("selected")) {
+                    todo.remove();
+
+                // otherwise, fade the item out, then remove it
+                } else {
+                    //delete item after it has faded out
+                    todo.addEventListener('transitionend', function() {
+                        this.remove();
+                    })
+                    todo.classList.add("fadeOut");
+                }
             }
         }
     }
