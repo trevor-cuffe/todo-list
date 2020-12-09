@@ -1,5 +1,9 @@
 // document.addEventListener("DOMContentLoaded", function() {
     //*** variable declarations ***//
+    //Local Variables
+    let dragging, draggedOver;
+
+    //Dom Variables
     const themeToggle = document.querySelector("#light-dark-toggle");
     const allTodos = document.querySelector("#all-todos");
     const todosLists = document.querySelectorAll(".todos-list");
@@ -70,9 +74,11 @@
     function init() {
         initTheme();
         setItemCount();
+        initDraggableItems();
     }
 
     function initTheme() {
+        //check whether the browser prefers dark mode        
         if(matchMedia && window.matchMedia('(prefers-color-scheme:dark)').matches) {
             setTheme('dark');
         } else {
@@ -82,7 +88,6 @@
 
     // toggle light vs. dark
     function toggleTheme() {
-
         if (document.documentElement.getAttribute('data-theme') === 'light' ) {
             setTheme('dark');
         } else {
@@ -91,6 +96,7 @@
     }
 
     function setTheme(input) {
+        //guard - check for appropriate input
         if (!['light','dark'].includes(input)) {
             console.error("invalid color theme for method setTheme");
             return;
@@ -196,13 +202,17 @@
                 // otherwise, fade the item out, then remove it
                 } else {
                     //delete item after it has faded out
-                    todo.addEventListener('transitionend', function() {
-                        this.remove();
-                    })
-                    todo.classList.add("fadeOut");
+                    fadeOut(todo);
                 }
             }
         }
+    }
+
+    function fadeOut(todo) {
+        todo.addEventListener('transitionend', function() {
+            this.remove();
+        })
+        todo.classList.add("fadeOut");
     }
 
     //refresh item count whenever items are added or removed
@@ -212,6 +222,45 @@
         remainingTodosCount.innerText = numItemsLeft;
     }
 
+
+    // *** Set Up Dragging Methods *** //
+    function initDraggableItems() {
+        const todos = allTodos.querySelectorAll(".todo");
+        for (todo of todos) {
+            setDraggable(todo);
+        }
+    }
+
+    function setDraggable(node) {
+        node.draggable = true;
+        node.addEventListener('drag', setDragging);
+        node.addEventListener('dragover', setDraggedOver);
+        node.addEventListener('drop', dropItem);
+    }
+
+    function setDragging(e) {
+        dragging = e.target;
+    }
+
+    function setDraggedOver(e) {
+        e.preventDefault();
+
+        //skip if this is a child element
+        if (!e.target.classList.contains("todo")) return;
+
+        draggedOver = e.target;
+    }
+
+    function dropItem(e) {
+        insertAfter(dragging, draggedOver);
+    }
+
+
+    // *** General Methods *** //
+
+    function insertAfter(newNode, referenceNode) {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+    }
 
 
 // })

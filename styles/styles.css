@@ -66,6 +66,8 @@ html {
 body {
 	box-sizing: border-box;
 	font-size: 1.6em;
+
+	background-color: var(--color-footerBackground);
 }
 
 .header {
@@ -73,6 +75,7 @@ body {
 	background-size: cover;
 	background-position: var(--headerBackgroundPosition);
 	height: 40vh;
+	/*Add animation for rising/setting sun/moon icons on toggle*/
 }
 
 .main {
@@ -245,13 +248,6 @@ body {
 	color: var(--color-todos-text-complete);
 	margin-top: 3rem;
 	font-size: 1.2rem;
-}
-
-/* Footer */
-
-.footer {
-	background-color: var(--color-footerBackground);
-	height: 60vh;
 }
 
 @media only screen and (max-width: 640px) {
