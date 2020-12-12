@@ -140,6 +140,10 @@
         //add content to todo
         newTodo.appendChild(todoContent);
 
+        //make the new todo draggable and droppable
+        setDraggable(newTodo);
+        setDroppable(newTodo);
+
         //update item count
         setItemCount();
 
@@ -226,37 +230,74 @@
     // *** Set Up Dragging Methods *** //
     function initDraggableItems() {
         const todos = allTodos.querySelectorAll(".todo");
+        const placeholder = allTodos.querySelector(".placeholder");
+
+        //make todos draggable and droppable
         for (todo of todos) {
             setDraggable(todo);
+            setDroppable(todo);
         }
+        //only make placeholder droppable
+        setDroppable(placeholder);
     }
 
     function setDraggable(node) {
         node.draggable = true;
-        node.addEventListener('drag', setDragging);
-        node.addEventListener('dragover', setDraggedOver);
+        node.addEventListener('dragstart', dragStart);
+        node.addEventListener('dragend', dragEnd);
+    }
+
+    function setDroppable(node) {
+        node.addEventListener('dragover', dragOver);
         node.addEventListener('drop', dropItem);
     }
 
-    function setDragging(e) {
+    function dragStart(e) {
+        console.log(e.target);
         dragging = e.target;
+        e.target.classList.add('dragging');
     }
 
-    function setDraggedOver(e) {
+    function dragOver(e) {
         e.preventDefault();
 
-        //skip if this is a child element
-        if (!e.target.classList.contains("todo")) return;
+        // if dragging is not defined, do nothing
+        if (!dragging) return;
 
+        //skip if this is a child element
+        if (e.target.parentElement.id !== 'all-todos') return;
+
+        draggedOver?.classList.remove("draggedOver");
         draggedOver = e.target;
+        draggedOver.classList.add("draggedOver");
     }
 
     function dropItem(e) {
+        // if dragging is not defined, do nothing
+        if (!dragging) return;
+
         insertAfter(dragging, draggedOver);
+
+        //dragEnd will fire next
+    }
+
+    //this fires when esc key is pressed, or after an item is dropped
+    function dragEnd(e) {
+        // if dragging is not defined, do nothing
+        if (!dragging) return;
+
+        dragging.classList.remove('dragging');
+        draggedOver.classList.remove("draggedOver");
+        dragging = undefined;
+        draggedOver = undefined;
     }
 
 
     // *** General Methods *** //
+
+    function insertBefore(newNode, referenceNode) {
+        referenceNode.parentNode.insertBefore(newNode, referenceNode);
+    }
 
     function insertAfter(newNode, referenceNode) {
         referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);

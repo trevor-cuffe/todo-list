@@ -123,7 +123,7 @@ body {
 	padding: 1em;
 	position: relative;
 	transition: all 0.3s;
-	overflow: hidden;
+	background-color: var(--color-todosBackground);
 }
 
 /*Use 'filter-hide' class to filter todos*/
@@ -248,6 +248,76 @@ body {
 	color: var(--color-todos-text-complete);
 	margin-top: 3rem;
 	font-size: 1.2rem;
+}
+
+/*** Dragging Styling ***/
+.dragging {
+	/* transform: scale(1.2); */
+	/* opacity: 0.7; */
+	/* border-radius: 0.5rem; */
+	background-color: var(--color-footerBackground);
+	color: transparent;
+	text-decoration-color: transparent;
+	border: 1px solid red;
+	border-radius: 0.5rem;
+}
+
+.dragging * {
+	color: transparent;
+	text-decoration-color: transparent;
+}
+
+.dragging.draggedOver {
+	border: 1px solid green;
+}
+
+/* .dragging:not(.draggedOver) {
+	height: 0;
+	padding: 0;
+	overflow: hidden;
+	border: none;
+} */
+
+#all-todos > li {
+	position: relative;
+}
+
+#all-todos > li::after {
+	content: "";
+	display: block;
+	height: 0;
+	position: absolute;
+	bottom: -0.5em;
+	left: 0;
+	width: 100%;
+	transition: height 0.2s, transform 0.2s;
+	z-index: 10;
+	opacity: 1;
+	background-color: var(--color-footerBackground);
+}
+
+#all-todos > li.draggedOver:not(.dragging)::after {
+	height: 1em;
+	border: 1px solid green;
+}
+
+#all-todos {
+	position: relative;
+}
+
+#all-todos > .placeholder {
+	height: 2rem; /* match margin-bottom set in todos-container:not(:last-child) */
+	width: 100%;
+	position: absolute;
+	top: -2rem;
+	background-color: transparent;
+
+	user-drag: none;
+	user-select: none;
+	-moz-user-select: none;
+	-webkit-user-drag: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
 }
 
 @media only screen and (max-width: 640px) {
