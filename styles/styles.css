@@ -256,15 +256,9 @@ body {
 	/* opacity: 0.7; */
 	/* border-radius: 0.5rem; */
 	background-color: var(--color-footerBackground);
-	color: transparent;
-	text-decoration-color: transparent;
+	opacity: 0.5;
 	border: 1px solid red;
 	border-radius: 0.5rem;
-}
-
-.dragging * {
-	color: transparent;
-	text-decoration-color: transparent;
 }
 
 .dragging.draggedOver {
