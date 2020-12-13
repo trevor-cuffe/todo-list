@@ -255,7 +255,7 @@
     function dragStart(e) {
         console.log(e.target);
         dragging = e.target;
-        e.target.classList.add('dragging');
+        dragging.classList.add('dragging');
     }
 
     function dragOver(e) {
