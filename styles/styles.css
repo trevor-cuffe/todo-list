@@ -65,7 +65,7 @@ html {
 
 body {
 	box-sizing: border-box;
-	font-size: 1.6em;
+	font-size: 1.6rem;
 
 	background-color: var(--color-footerBackground);
 }
@@ -126,6 +126,11 @@ body {
 	background-color: var(--color-todosBackground);
 }
 
+.todo-complete {
+	text-decoration: line-through;
+	color: var(--color-todos-text-complete);
+}
+
 /*Use 'filter-hide' class to filter todos*/
 #all-todos .todo.filter-hide {
 	height: 0;
@@ -182,12 +187,12 @@ body {
 
 .todo-content {
 	margin-left: 3rem;
-	word-wrap: wrap;
+	word-wrap: break-word;
 }
 
 .todo.todo-complete > .todo-content {
-	text-decoration: line-through;
-	color: var(--color-todos-text-complete);
+	/* text-decoration: line-through;
+	color: var(--color-todos-text-complete); */
 }
 
 /* New TODO */
@@ -195,6 +200,7 @@ body {
 	background: transparent;
 	outline: none;
 	border: none;
+	width: 100%;
 }
 
 .todo-input::placeholder {
@@ -239,6 +245,10 @@ body {
 	color: var(--color-todo);
 }
 
+.todos-remaining-count > .todo-footer-button:hover {
+	cursor: default;
+}
+
 .todo-footer-button.selected {
 	color: var(--color-brightBlue);
 }
@@ -256,9 +266,13 @@ body {
 	/* opacity: 0.7; */
 	/* border-radius: 0.5rem; */
 	background-color: var(--color-footerBackground);
-	opacity: 0.5;
 	border: 1px solid red;
+	color: rgba(100, 100, 100, 0.3);
 	border-radius: 0.5rem;
+}
+
+.todo-complete.dragging {
+	color: rgba(100, 100, 100, 0.2);
 }
 
 .dragging.draggedOver {
@@ -312,6 +326,24 @@ body {
 	-webkit-user-drag: none;
 	-webkit-user-select: none;
 	-ms-user-select: none;
+}
+
+@media only screen and (max-width: 1200px) {
+	html {
+		font-size: 56.25%;
+	}
+}
+
+@media only screen and (max-width: 900px) {
+	html {
+		font-size: 50%;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	html {
+		font-size: 37.5%;
+	}
 }
 
 @media only screen and (max-width: 640px) {
